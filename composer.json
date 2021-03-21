@@ -6,7 +6,9 @@
             "email": "contact@leoboyer.fr"
         }
     ],
-    "require": {},
+    "require": {
+      "ext-curl": "*"
+    },
     "autoload": {
         "psr-4": {
             "Lib\\": "lib/"

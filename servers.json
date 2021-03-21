@@ -1,0 +1,38 @@
+[
+  {
+    "serverId": "3",
+    "serverName": "Arashiyama",
+    "sites": [
+      {
+        "name": "Ysk staging",
+        "urls": [ "staging.ysk.app" ]
+      },
+      {
+        "name": "Ysk prod",
+        "urls": [ "www.ysk.app" ]
+      }
+    ]
+  },
+  {
+    "serverId": "1",
+    "serverName": "Daintree",
+    "sites": [
+      {
+        "name": "Portfolio Léo Boyer",
+        "urls": [
+          "www.leoboyer.fr",
+          "assets.leoboyer.fr",
+          "cv.leoboyer.fr",
+          "l.leoboyer.fr"
+        ]
+      },
+      {
+        "name": "ColorJS",
+        "urls": [
+          "colorjs.cc",
+          "sync.colorjs.cc"
+        ]
+      }
+    ]
+  }
+]

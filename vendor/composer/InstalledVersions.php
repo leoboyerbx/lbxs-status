@@ -25,24 +25,24 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => '1.0.0+no-version-set',
-    'version' => '1.0.0.0',
+    'pretty_version' => 'dev-master',
+    'version' => 'dev-master',
     'aliases' => 
     array (
     ),
-    'reference' => NULL,
+    'reference' => 'a2098ab636c9d694d87bff88a25052bbf7c2a351',
     'name' => 'leoboyerbx/lbxs-net',
   ),
   'versions' => 
   array (
     'leoboyerbx/lbxs-net' => 
     array (
-      'pretty_version' => '1.0.0+no-version-set',
-      'version' => '1.0.0.0',
+      'pretty_version' => 'dev-master',
+      'version' => 'dev-master',
       'aliases' => 
       array (
       ),
-      'reference' => NULL,
+      'reference' => 'a2098ab636c9d694d87bff88a25052bbf7c2a351',
     ),
   ),
 );

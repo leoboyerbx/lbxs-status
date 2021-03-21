@@ -5,6 +5,7 @@ class ServerEntity {
     public string $serverName;
     public string $id;
     public bool $isCurrent;
+    public int $status;
 
     public array $sites;
 
@@ -14,11 +15,13 @@ class ServerEntity {
         $this->isCurrent = $this->id === LBX_SERVER_ID;
 
         $this->sites = WebsiteEntity::createMultiple($config->sites);
+        $this->status = self::getStatus($this->websitesStatusArray());
     }
 
-    public function allStatus() {
-        return array_map(function (WebsiteEntity $website) {
 
+    public function websitesStatusArray(): array {
+        return array_map(function (WebsiteEntity $website) {
+            return $website->status();
         }, $this->sites);
     }
 
@@ -28,5 +31,22 @@ class ServerEntity {
             $result[] = new self($item);
         }
         return $result;
+    }
+
+    public static function globalStatus($servers) {
+        return self::getStatus(array_map(function (self $server) {
+            return $server->status;
+        }, $servers));
+    }
+
+    public static function getStatus($statusArray): int {
+        $worstStatus = max($statusArray);
+        if ($worstStatus < LBX_ALL_DOWN) {
+            return $worstStatus;
+        }
+        if (in_array(LBX_ALL_UP, $statusArray) || in_array(LBX_SOME_DOWN, $statusArray)) {
+            return LBX_SOME_DOWN;
+        }
+        return LBX_ALL_DOWN;
     }
 }

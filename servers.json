@@ -6,10 +6,6 @@
       {
         "name": "Ysk staging",
         "urls": [ "staging.ysk.app" ]
-      },
-      {
-        "name": "Ysk prod",
-        "urls": [ "www.ysk.app" ]
       }
     ]
   },

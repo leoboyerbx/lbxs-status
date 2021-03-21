@@ -32,7 +32,7 @@ class WebsiteEntity {
     }
 
     public function numberOfUrlsDown () {
-        return $this->numberOfUrls() - $this->numberOfUrlsDown();
+        return $this->numberOfUrls() - $this->numberOfUrlsUp();
     }
 
     public static function createMultiple(array $items): array {

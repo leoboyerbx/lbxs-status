@@ -1,0 +1,13 @@
+version: '3'
+services:
+  web:
+    image: php:8.0-apache
+    container_name: lbxsnet_server
+    volumes:
+      - ./:/var/www/html/:delegated
+      - ./_docker/logs/:/var/log/:delegated
+#      - ./_docker/php.ini/:/usr/local/etc/php/conf.d/custom.ini:delegated
+    ports:
+      - "80:80"
+    stdin_open: true
+    tty: true

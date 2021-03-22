@@ -21,7 +21,7 @@ class ServerEntity {
 
     public function websitesStatusArray(): array {
         return array_map(function (WebsiteEntity $website) {
-            return $website->status();
+            return $website->status;
         }, $this->sites);
     }
 

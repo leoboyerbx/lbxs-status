@@ -5,13 +5,16 @@ namespace Lib\Class;
 class WebsiteEntity {
     public string $name;
     public array $urls;
+    public int $status;
 
     public function __construct(\stdClass $config) {
         $this->name = $config->name;
         $this->urls = UrlEntity::createMultiple($config->urls);
+
+        $this->status = $this->getStatus();
     }
 
-    public function status() {
+    public function getStatus() {
         if ($this->numberOfUrls() === $this->numberOfUrlsUp()) {
             return LBX_ALL_UP;
         } else if ($this->numberOfUrls() === $this->numberOfUrlsDown()) {

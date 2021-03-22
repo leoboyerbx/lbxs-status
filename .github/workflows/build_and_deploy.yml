@@ -1,0 +1,52 @@
+name: Build and deploy
+
+on:
+  push:
+    branches: [ deploy ]
+  pull_request:
+    branches: [ deploy ]
+
+jobs:
+ build-generic:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v2.1.5
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate --strict
+
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v2
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress --no-suggest
+    
+    - name: Build tailwind file
+      run:  npx --yes tailwindcss-cli@latest build -o css/tailwind.css
+      
+    - name: Upload build result
+      uses: actions/upload-artifact@v2
+      with:
+        name: generic-build
+        path: |
+          css/
+          lib/
+          partials/
+          vendor/
+          *.php
+          serverConfig.example.json
+          servers.json
+
+      
+      

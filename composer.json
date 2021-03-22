@@ -17,7 +17,7 @@
             "git merge main",
             "git pull",
             "git push",
-            "git git checkout main"
+            "git checkout main"
         ]
     },
     "require": {

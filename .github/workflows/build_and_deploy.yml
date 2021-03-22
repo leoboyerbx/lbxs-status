@@ -65,7 +65,7 @@ jobs:
       - name: Deploy to Daintree
         uses: burnett01/rsync-deployments@4.1
         with:
-          switches: -avzr --delete
+          switches: -avzr --delete --exclude serverConfig.json
           path: build/
           remote_path: /home/leo/lbxs-status
           remote_host: daintree.lbxs.dev
@@ -85,7 +85,7 @@ jobs:
       - name: Deploy to Taïga
         uses: burnett01/rsync-deployments@4.1
         with:
-          switches: -avzr --delete
+          switches: -avzr --delete --exclude serverConfig.json
           path: build/
           remote_path: ~/lbxs-status
           remote_host: taiga.lbxs.dev
@@ -105,7 +105,7 @@ jobs:
       - name: Deploy to Arashiyama
         uses: burnett01/rsync-deployments@4.1
         with:
-          switches: -avzr --delete
+          switches: -avzr --delete --exclude serverConfig.json
           path: build/
           remote_path: ~/lbxs-status
           remote_host: arashiyama.lbxs.dev

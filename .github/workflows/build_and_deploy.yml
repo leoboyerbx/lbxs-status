@@ -51,5 +51,15 @@ jobs:
           serverConfig.example.json
           servers.json
 
+ deploy-daintree:
+    needs: build-generic
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: generic-build
+          path: build
 
-
+      - name: Display structure of downloaded files
+        run: ls -R
+        working-directory: build

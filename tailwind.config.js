@@ -1,6 +1,7 @@
 module.exports = {
     purge: [
         './index.php',
+        'partials/*'
     ],
     theme: {
         fontFamily: {

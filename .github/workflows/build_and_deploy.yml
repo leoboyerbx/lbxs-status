@@ -36,7 +36,7 @@ jobs:
       run:  sudo npm i -g tailwindcss-cli@latest
 
     - name: Build tailwind CSS
-      run:  tailwindcss-cli build -o css/tailwind.css
+      run:  NODE_ENV=production tailwindcss-cli build -o css/tailwind.css
 
     - name: Upload build result
       uses: actions/upload-artifact@v2

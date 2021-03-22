@@ -1,31 +1,16 @@
 <?php
-
 use Lib\Class\ServerEntity;
+use Windwalker\Renderer\PhpRenderer;
 
 require_once 'includes.php';
 
+$renderer = new PhpRenderer(__DIR__ . '/partials', []);
+
 /** @var ServerEntity[] $servers */
 $servers = getServers(true);
-$currentServer = $servers[0];
+$currentServer = array_shift($servers);
 
 $globalStatus = ServerEntity::globalStatus($servers);
-
-function colorFromStatus ($status) {
-    if ($status === LBX_ALL_UP) {
-        return 'green';
-    } else if ($status === LBX_SOME_DOWN) {
-        return 'yellow';
-    }
-    return 'red';
-}
-function sentenceFromStatus ($status, $entity = 'websites') {
-    if ($status === LBX_ALL_UP) {
-        return "All $entity are up.";
-    } else if ($status === LBX_SOME_DOWN) {
-        return "Some $entity are down.";
-    }
-    return "All $entity are down.";
-}
 
 ?>
 
@@ -50,7 +35,7 @@ function sentenceFromStatus ($status, $entity = 'websites') {
                 </p>
                 <div class="flex items-center">
                         <span
-                                class="rounded-full w-3 h-3 bg-<?php echo colorFromStatus($currentServer->status) ?>-500"
+                                class="rounded-full w-2 h-2 bg-<?php echo colorFromStatus($currentServer->status) ?>-500"
                         ></span>
                     <p class=" ml-2 text-<?php echo colorFromStatus($globalStatus) ?>-500">
                         <?php echo sentenceFromStatus($globalStatus, 'servers') ?>
@@ -62,7 +47,7 @@ function sentenceFromStatus ($status, $entity = 'websites') {
                     <h1 class="text-8xl font-bold text-center text-gray-700 w-auto"><?php echo $currentServer->serverName ?></h1>
                     <div class="flex my-4 items-center">
                         <span
-                                class="rounded-full w-5 h-5 bg-<?php echo colorFromStatus($currentServer->status) ?>-500"
+                                class="rounded-full w-3 h-3 bg-<?php echo colorFromStatus($currentServer->status) ?>-500"
                         ></span>
                         <p class=" ml-2 text-<?php echo colorFromStatus($currentServer->status) ?>-500 text-xl">
                             <?php echo sentenceFromStatus($currentServer->status) ?>
@@ -72,9 +57,18 @@ function sentenceFromStatus ($status, $entity = 'websites') {
             </section>
         </header>
         <main>
-            <section>
-
-            </section>
+            <article>
+                <header class="py-3">
+                    <h2 class="text-2xl text-gray-600 px-4 mb-4">
+                        Websites of <strong><?php echo $currentServer->serverName ?></strong> server
+                    </h2>
+                </header>
+                <section>
+                    <?php foreach ($currentServer->sites as $site): ?>
+                    <?php echo $renderer->render('website', compact('site')) ?>
+                    <?php endforeach; ?>
+                </section>
+            </article>
         </main>
     </article>
 </body>

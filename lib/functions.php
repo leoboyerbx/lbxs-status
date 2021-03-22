@@ -6,6 +6,9 @@ function getServerConfig($file = null) {
     $file = $file ?? dirname(__DIR__) . '/serverConfig.json';
     try {
         $configJson = file_get_contents($file);
+        if (!$configJson) {
+            die('Unable to find a config file.');
+        }
         return json_decode($configJson);
     } catch (Error $e) {
         echo "error reading config file.";
@@ -52,6 +55,28 @@ function printVar()
         print_r($var);
     }
     echo '</pre>' . "\n";
+}
+
+// Rendering funcs
+/**
+ *
+ */
+function colorFromStatus ($status) {
+    if ($status === LBX_ALL_UP) {
+        return 'green';
+    } else if ($status === LBX_SOME_DOWN) {
+        return 'yellow';
+    }
+    return 'red';
+}
+
+function sentenceFromStatus ($status, $entity = 'websites') {
+    if ($status === LBX_ALL_UP) {
+        return "All $entity are up.";
+    } else if ($status === LBX_SOME_DOWN) {
+        return "Some $entity are down.";
+    }
+    return "All $entity are down.";
 }
 
 /**

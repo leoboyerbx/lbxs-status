@@ -29,6 +29,10 @@ class UrlEntity {
         return $result;
     }
 
+    public function __toString(): string {
+        return $this->url;
+    }
+
     public function testUrl() {
         $timeout = 10;
         $ch = curl_init();

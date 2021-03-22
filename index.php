@@ -71,13 +71,20 @@ $currentServer = array_shift($servers);
                 </section>
             </article>
             <section>
-                <h2 class="text-2xl text-gray-600 px-4 mb-4">Websites of other servers from LBXS Network</h2>
+                <h2 class="text-2xl text-gray-600 px-4 my-4 font-bold">Other servers from LBXS Network</h2>
                 <?php foreach ($servers as $server): ?>
                     <article class="border-b border-gray-200 mb-4">
                         <header class="py-3">
-                            <h3 class="text-xl text-gray-600 px-4 mb-4">
+                            <h3 class="text-xl text-gray-600 px-4 mb-2">
                                 Websites of <strong><?php echo $server->serverName ?></strong> server
                             </h3>
+                            <a
+                                    href="<?php echo $server->serverPage ?>"
+                                    class="font-light mb-4 px-4 text-blue-400 hover:underline"
+                                    target="_blank"
+                            >
+                                View server page
+                            </a>
                         </header>
                         <section>
                             <?php foreach ($server->sites as $site): ?>

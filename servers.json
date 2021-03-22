@@ -1,16 +1,5 @@
 [
   {
-    "serverId": "3",
-    "serverName": "Arashiyama",
-    "serverPage": "https://arashiyama.lbxs.dev",
-    "sites": [
-      {
-        "name": "Ysk staging",
-        "urls": [ "staging.ysk.app" ]
-      }
-    ]
-  },
-  {
     "serverId": "1",
     "serverName": "Daintree",
     "serverPage": "https://daintree.lbxs.dev",
@@ -30,6 +19,40 @@
           "colorjs.cc",
           "sync.colorjs.cc"
         ]
+      }
+    ]
+  },
+  {
+    "serverId": "2",
+    "serverName": "Sagano Bamboo",
+    "serverPage": "https://sagano.lbxs.dev",
+    "sites": [
+      {
+        "name": "Portfolio Léo Boyer",
+        "urls": [
+          "www.leoboyer.fr",
+          "assets.leoboyer.fr",
+          "cv.leoboyer.fr",
+          "l.leoboyer.fr"
+        ]
+      },
+      {
+        "name": "ColorJS",
+        "urls": [
+          "colorjs.cc",
+          "sync.colorjs.cc"
+        ]
+      }
+    ]
+  },
+  {
+    "serverId": "3",
+    "serverName": "Arashiyama",
+    "serverPage": "https://arashiyama.lbxs.dev",
+    "sites": [
+      {
+        "name": "Ysk staging",
+        "urls": [ "staging.ysk.app" ]
       }
     ]
   }

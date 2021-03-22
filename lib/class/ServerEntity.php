@@ -3,6 +3,7 @@ namespace Lib\Class;
 
 class ServerEntity {
     public string $serverName;
+    public string $serverPage;
     public string $id;
     public bool $isCurrent;
     public int $status;
@@ -11,6 +12,7 @@ class ServerEntity {
 
     public function __construct(\stdClass $config) {
         $this->serverName = $config->serverName;
+        $this->serverPage = $config->serverPage;
         $this->id = $config->serverId;
         $this->isCurrent = $this->id === LBX_SERVER_ID;
 

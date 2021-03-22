@@ -81,9 +81,8 @@ $currentServer = array_shift($servers);
                             <a
                                     href="<?php echo $server->serverPage ?>"
                                     class="font-light mb-4 px-4 text-blue-400 hover:underline"
-                                    target="_blank"
                             >
-                                View server page
+                                Switch to this server
                             </a>
                         </header>
                         <section>

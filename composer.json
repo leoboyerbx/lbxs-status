@@ -1,11 +1,17 @@
 {
     "name": "leoboyerbx/lbxs-net",
+    "description": "Up status of lbxs network servers",
     "authors": [
         {
             "name": "leoboyerbx",
             "email": "contact@leoboyer.fr"
         }
     ],
+    "scripts": {
+        "start": [
+            "docker-compose up"
+        ]
+    },
     "require": {
       "ext-curl": "*"
     },

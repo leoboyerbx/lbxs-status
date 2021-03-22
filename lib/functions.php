@@ -6,6 +6,9 @@ function getServerConfig($file = null) {
     $file = $file ?? dirname(__DIR__) . '/serverConfig.json';
     try {
         $configJson = file_get_contents($file);
+        if (!$configJson) {
+            die('Unable to find a config file.');
+        }
         return json_decode($configJson);
     } catch (Error $e) {
         echo "error reading config file.";

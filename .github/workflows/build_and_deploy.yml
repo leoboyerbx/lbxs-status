@@ -32,8 +32,11 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-suggest
 
-    - name: Build tailwind file
-      run:  npx --yes tailwindcss-cli@latest build -o css/tailwind.css
+    - name: Install tailwind
+      run:  npm i -g tailwindcss-cli@latest
+
+    - name: Build tailwind CSS
+      run:  tailwindcss-cli build -o css/tailwind.css
 
     - name: Upload build result
       uses: actions/upload-artifact@v2

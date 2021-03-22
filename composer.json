@@ -11,6 +11,13 @@
     "scripts": {
         "start": [
             "docker-compose up"
+        ],
+        "deploy": [
+            "git checkout deploy",
+            "git merge main",
+            "git pull",
+            "git push",
+            "git git checkout main"
         ]
     },
     "require": {

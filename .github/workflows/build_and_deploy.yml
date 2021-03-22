@@ -48,6 +48,8 @@ jobs:
           partials/
           vendor/
           *.php
+          composer.json
+          composer.lock
           serverConfig.example.json
           servers.json
 

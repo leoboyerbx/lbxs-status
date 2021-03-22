@@ -31,7 +31,7 @@ function getServers($currentFirst = true, $file = null): array {
         }
         return $servers;
     } catch (Error $e) {
-        echo "error reading config file.";
+        echo "error reading servers file.";
         exit();
     }
 }

@@ -60,6 +60,53 @@ jobs:
           name: generic-build
           path: build
 
-      - name: Display structure of downloaded files
-        run: ls -R
-        working-directory: build
+      - name: Deploy to Daintree
+        uses: burnett01/rsync-deployments@4.1
+        with:
+          switches: -avzr --delete
+          path: build/
+          remote_path: /home/leo/lbxs-status
+          remote_host: daintree.lbxs.dev
+          remote_port: ${{ secrets.DAINTREE_PORT }}
+          remote_user: ${{ secrets.DAINTREE_USERNAME }}
+          remote_key: ${{ secrets.SFTP_PRIVATE_KEY }}
+
+ deploy-taiga:
+    needs: build-generic
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: generic-build
+          path: build
+
+      - name: Deploy to Taïga
+        uses: burnett01/rsync-deployments@4.1
+        with:
+          switches: -avzr --delete
+          path: build/
+          remote_path: ~/lbxs-status
+          remote_host: taiga.lbxs.dev
+          remote_port: ${{ secrets.TAIGA_PORT }}
+          remote_user: ${{ secrets.TAIGA_USERNAME }}
+          remote_key: ${{ secrets.SFTP_PRIVATE_KEY }}
+
+ deploy-arashiyama:
+    needs: build-generic
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: generic-build
+          path: build
+
+      - name: Deploy to Arashiyama
+        uses: burnett01/rsync-deployments@4.1
+        with:
+          switches: -avzr --delete
+          path: build/
+          remote_path: ~/lbxs-status
+          remote_host: arashiyama.lbxs.dev
+          remote_port: ${{ secrets.ARASHIYAMA_PORT }}
+          remote_user: ${{ secrets.ARASHIYAMA_USERNAME }}
+          remote_key: ${{ secrets.SFTP_PRIVATE_KEY }}

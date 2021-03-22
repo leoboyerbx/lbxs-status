@@ -26,6 +26,8 @@ $currentServer = array_shift($servers);
 
     <link rel="stylesheet" href="https://use.typekit.net/mkm0xzt.css">
     <link rel="stylesheet" href="css/tailwind.css">
+
+    <link rel="icon" href="img/icon-<?php echo colorFromStatus($currentServer->status) ?>.png">
 </head>
 <body>
     <article class="container mx-auto px-4 md:px-10 font-display">

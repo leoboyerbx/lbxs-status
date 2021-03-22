@@ -13,7 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    
+
     - name: Setup Node.js environment
       uses: actions/setup-node@v2.1.5
 
@@ -31,10 +31,10 @@ jobs:
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-suggest
-    
+
     - name: Build tailwind file
       run:  npx --yes tailwindcss-cli@latest build -o css/tailwind.css
-      
+
     - name: Upload build result
       uses: actions/upload-artifact@v2
       with:
@@ -48,5 +48,5 @@ jobs:
           serverConfig.example.json
           servers.json
 
-      
-      
+
+

@@ -1,6 +1,7 @@
 {
     "name": "leoboyerbx/lbxs-net",
     "description": "Up status of lbxs network servers",
+    "license": "MIT",
     "authors": [
         {
             "name": "leoboyerbx",

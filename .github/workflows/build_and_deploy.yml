@@ -33,7 +33,7 @@ jobs:
       run: composer install --prefer-dist --no-progress --no-suggest
 
     - name: Install tailwind
-      run:  npm i -g tailwindcss-cli@latest
+      run:  sudo npm i -g tailwindcss-cli@latest
 
     - name: Build tailwind CSS
       run:  tailwindcss-cli build -o css/tailwind.css

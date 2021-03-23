@@ -22,7 +22,8 @@
     },
     "require": {
       "ext-curl": "*",
-        "windwalker/renderer": "^3.5"
+    "windwalker/renderer": "^3.5",
+        "symfony/yaml": "^5.2"
     },
     "autoload": {
         "psr-4": {

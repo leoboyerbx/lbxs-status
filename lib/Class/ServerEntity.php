@@ -10,13 +10,14 @@ class ServerEntity {
 
     public array $sites;
 
-    public function __construct(\stdClass $config) {
-        $this->serverName = $config->serverName;
-        $this->serverPage = $config->serverPage;
-        $this->id = $config->serverId;
+    public function __construct(array|\stdClass $config) {
+        if (!is_array($config)) $config = get_object_vars($config);
+        $this->serverName = $config['serverName'];
+        $this->serverPage = $config['serverPage'];
+        $this->id = $config['serverId'];
         $this->isCurrent = $this->id === LBX_SERVER_ID;
 
-        $this->sites = WebsiteEntity::createMultiple($config->sites);
+        $this->sites = WebsiteEntity::createMultiple($config['sites']);
         $this->status = self::getStatus($this->websitesStatusArray());
     }
 

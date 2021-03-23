@@ -7,9 +7,10 @@ class WebsiteEntity {
     public array $urls;
     public int $status;
 
-    public function __construct(\stdClass $config) {
-        $this->name = $config->name;
-        $this->urls = UrlEntity::createMultiple($config->urls);
+    public function __construct(array|\stdClass $config) {
+        if (!is_array($config)) $config = get_object_vars($config);
+        $this->name = $config['name'];
+        $this->urls = UrlEntity::createMultiple($config['urls']);
 
         $this->status = $this->getStatus();
     }

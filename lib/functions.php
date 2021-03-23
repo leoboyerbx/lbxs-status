@@ -1,6 +1,7 @@
 <?php
 
 use \Lib\Class\ServerEntity;
+use Symfony\Component\Yaml\Yaml;
 
 function getServerConfig($file = null) {
     $file = $file ?? dirname(__DIR__) . '/serverConfig.json';
@@ -17,10 +18,10 @@ function getServerConfig($file = null) {
 }
 
 function getServers($currentFirst = true, $file = null): array {
-    $file = $file ?? dirname(__DIR__) . '/servers.json';
+    $file = $file ?? dirname(__DIR__) . '/servers.yml';
     try {
-        $serversJson = file_get_contents($file);
-        $serversData = json_decode($serversJson);
+        $serversYaml = file_get_contents($file);
+        $serversData = Yaml::parse($serversYaml);
         $servers = ServerEntity::createMultiple($serversData);
         if ($currentFirst) {
             usort($servers, function (ServerEntity $a, ServerEntity $b) {

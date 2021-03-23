@@ -12,7 +12,7 @@ function getServerConfig($file = null) {
         }
         return json_decode($configJson);
     } catch (Error $e) {
-        echo "error reading config file.";
+        debuge('Error reading config file:', $e->getMessage());
         exit();
     }
 }
@@ -32,7 +32,7 @@ function getServers($currentFirst = true, $file = null): array {
         }
         return $servers;
     } catch (Error $e) {
-        echo "error reading servers file.";
+        debuge('Error reading servers file:', $e->getMessage());
         exit();
     }
 }

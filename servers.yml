@@ -2,7 +2,7 @@
   serverName: Daintree
   serverPage: https://daintree.lbxs.dev
   sites:
-    - name: Léo Byer's portfolio --> production
+    - name: Léo Boyer's portfolio --> production
       urls:
         - www.leoboyer.fr
         - assets.leoboyer.fr
@@ -12,6 +12,9 @@
       urls:
         - start.lbxs.dev
         - ws.start.lbxs.dev
+    - name: CORSAnywhere proxy instance
+      urls:
+        - cors-proxy.lbxs.dev
     - name: Demo websites of leoboyer.dev
       urls:
         - hackathon.leoboyer.dev
@@ -27,7 +30,7 @@
         - cdn.colorjs.cc
         - p.colorjs.cc
         - sync.colorjs.cc
-    - name: '"Flirt sans épines\" --> production'
+    - name: '"Flirt sans épines" --> production'
       urls:
         - www.flirtsansepines.cf
         - www.flirtesansepines.cf

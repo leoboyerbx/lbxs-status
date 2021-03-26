@@ -63,7 +63,7 @@ $globalStatus = ServerEntity::globalStatus($servers);
                     <span class="text-gray-300 ml-2 text-md">(<?php echo $server->serverPage ?>)</span>
                 </a>
                 <p class="text-<?php echo colorFromStatus($server->status) ?>-500 px-2 pt-1 pb-4">
-                    <?php echo $server->numberOfUpWebsites() ?>/<?php echo $server->numberOfWebsites() ?> websites running.
+                    <?php echo $server->numberOfUpWebsites() ?>/<?php echo $server->numberOfWebsites() ?> website<?php echo $server->numberOfWebsites() > 1 ? 's' : '' ?> running.
                 </p>
             <?php endforeach; ?>
         </section>

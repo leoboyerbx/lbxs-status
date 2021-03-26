@@ -46,6 +46,7 @@ jobs:
           css/
           img/
           lib/
+          pages/
           partials/
           vendor/
           *.php

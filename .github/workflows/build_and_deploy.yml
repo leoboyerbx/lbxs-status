@@ -12,47 +12,53 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@0.3.0
+        with:
+          args: 'New deployment to all servers started...'
+      - uses: actions/checkout@v2
 
-    - name: Setup Node.js environment
-      uses: actions/setup-node@v2.1.5
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.5
 
-    - name: Validate composer.json and composer.lock
-      run: composer validate --strict
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
 
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v2
-      with:
-        path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
 
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress --no-suggest
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
 
-    - name: Install tailwind
-      run:  sudo npm i -g tailwindcss-cli@latest
+      - name: Install tailwind
+        run:  sudo npm i -g tailwindcss-cli@latest
 
-    - name: Build tailwind CSS
-      run:  NODE_ENV=production tailwindcss-cli build -o css/tailwind.css
+      - name: Build tailwind CSS
+        run:  NODE_ENV=production tailwindcss-cli build -o css/tailwind.css
 
-    - name: Upload build result
-      uses: actions/upload-artifact@v2
-      with:
-        name: generic-build
-        path: |
-          css/
-          img/
-          lib/
-          partials/
-          vendor/
-          *.php
-          composer.json
-          composer.lock
-          serverConfig.example.json
-          servers.yml
+      - name: Upload build result
+        uses: actions/upload-artifact@v2
+        with:
+          name: generic-build
+          path: |
+            css/
+            img/
+            lib/
+            partials/
+            vendor/
+            *.php
+            composer.json
+            composer.lock
+            serverConfig.example.json
+            servers.yml
 
  deploy-daintree:
     needs: build-generic
@@ -73,6 +79,12 @@ jobs:
           remote_port: ${{ secrets.DAINTREE_PORT }}
           remote_user: ${{ secrets.DAINTREE_USERNAME }}
           remote_key: ${{ secrets.SFTP_PRIVATE_KEY }}
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@0.3.0
+        with:
+          args: 'Deployment succeeded to https://daintree.lbxs.dev/'
 
  deploy-taiga:
     needs: build-generic
@@ -93,6 +105,12 @@ jobs:
           remote_port: ${{ secrets.TAIGA_PORT }}
           remote_user: ${{ secrets.TAIGA_USERNAME }}
           remote_key: ${{ secrets.SFTP_PRIVATE_KEY }}
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@0.3.0
+        with:
+          args: 'Deployment succeeded to https://taiga.lbxs.dev/'
 
  deploy-arashiyama:
     needs: build-generic
@@ -113,3 +131,9 @@ jobs:
           remote_port: ${{ secrets.ARASHIYAMA_PORT }}
           remote_user: ${{ secrets.ARASHIYAMA_USERNAME }}
           remote_key: ${{ secrets.SFTP_PRIVATE_KEY }}
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@0.3.0
+        with:
+          args: 'Deployment succeeded to https://arashiyama.lbxs.dev/'

@@ -67,3 +67,10 @@
     - name: Ysk staging (proxied by Taiga)
       urls:
         - staging.ysk.app
+- serverId: '4'
+  serverName: 'Hallerbos'
+  serverPage: https://hallerbos.lbxs.dev
+  sites:
+    - name: Ysk prod
+      urls:
+        - www.ysk.app

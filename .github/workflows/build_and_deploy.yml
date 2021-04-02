@@ -138,3 +138,29 @@ jobs:
         uses: Ilshidur/action-discord@0.3.0
         with:
           args: 'Deployment succeeded to https://arashiyama.lbxs.dev/'
+
+ deploy-hallerbos:
+    needs: build-generic
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: generic-build
+          path: build
+
+      - name: Deploy to Hallerbos
+        uses: burnett01/rsync-deployments@4.1
+        with:
+          switches: -avzr --delete --exclude serverConfig.json
+          path: build/
+          remote_path: ~/lbxs-status
+          remote_host: hallerbos.lbxs.dev
+          remote_port: ${{ secrets.HALLERBOS_PORT }}
+          remote_user: ${{ secrets.HALLERBOS_USERNAME }}
+          remote_key: ${{ secrets.SFTP_PRIVATE_KEY }}
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@0.3.0
+        with:
+          args: 'Deployment succeeded to https://hallerbos.lbxs.dev/'

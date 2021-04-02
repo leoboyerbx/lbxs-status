@@ -2,6 +2,7 @@
 
 use \Lib\Class\ServerEntity;
 use Symfony\Component\Yaml\Yaml;
+use Windwalker\Renderer\PhpRenderer;
 
 function getServerConfig($file = null) {
     $file = $file ?? dirname(__DIR__) . '/serverConfig.json';
@@ -139,3 +140,5 @@ function dumpe()
         exit;
     }
 }
+
+$renderer = new PhpRenderer(__DIR__ . '/partials', []);

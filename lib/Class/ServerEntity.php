@@ -9,6 +9,7 @@ class ServerEntity {
     public int $status;
 
     public array $sites;
+    public array $websitesStatus;
 
     public function __construct(array|\stdClass $config) {
         if (!is_array($config)) $config = get_object_vars($config);
@@ -18,7 +19,8 @@ class ServerEntity {
         $this->isCurrent = $this->id === LBX_SERVER_ID;
 
         $this->sites = WebsiteEntity::createMultiple($config['sites']);
-        $this->status = self::getStatus($this->websitesStatusArray());
+        $this->websitesStatus = $this->websitesStatusArray();
+        $this->status = self::getStatus($this->websitesStatus);
     }
 
 
@@ -26,6 +28,20 @@ class ServerEntity {
         return array_map(function (WebsiteEntity $website) {
             return $website->status;
         }, $this->sites);
+    }
+
+    public function numberOfWebsites() {
+        return count($this->sites);
+    }
+
+    public function numberOfUpWebsites() {
+        return count(array_filter($this->websitesStatus, function ($status) {
+            return $status === LBX_ALL_UP;
+        }));
+    }
+
+    public function numberOfDownWebsites() {
+        return $this->numberOfWebsites() - $this->numberOfUpWebsites();
     }
 
     public static function createMultiple(array $items): array {
